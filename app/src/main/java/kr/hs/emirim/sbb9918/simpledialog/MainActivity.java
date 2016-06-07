@@ -9,21 +9,28 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-
+    String items[] = {"젤리빈","킷켓","롤리팝"};
+    Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button btn = (Button)findViewById(R.id.but_dialog);
+        btn = (Button)findViewById(R.id.but_dialog);
         btn.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
+
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("First Dialog");
-        dialog.setMessage("This is message part");
+        dialog.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                btn.setText(items[which]);
+            }
+        });
         dialog.setIcon(R.drawable.jw1);
         dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
